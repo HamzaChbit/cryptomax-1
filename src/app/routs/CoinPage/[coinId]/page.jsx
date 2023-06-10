@@ -16,12 +16,21 @@ const params = useParams();
 
 
 
-useEffect(()=>{
-  axios.get(url).then((response)=>{
-    setCoin(response.data)
+// useEffect(()=>{
+//   axios.get(url).then((response)=>{
+//     setCoin(response.data)
   
-  })
-  },[url])
+//   })
+//   },[url])
+useEffect(() => {
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => setCoin(data))
+    .catch((error) => {
+      // Handle any error that occurred during the fetch request
+      console.error('Error:', error);
+    });
+}, [url]);
 
 
   return (

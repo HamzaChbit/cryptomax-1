@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+
 import Image from 'next/image'
 import bitcoine from "../../../../public/Bitcoin.svg.png" 
 
@@ -11,12 +11,27 @@ const Trending = () => {
 const [trending,setTrending] = useState([])
  const url = "https://api.coingecko.com/api/v3/search/trending";
 
-useEffect(()=> {
-axios.get(url).then((response)=>{
-    setTrending(response.data.coins);
-    console.log(response.data.coins)
-})
-},[])
+// useEffect(()=> {
+// axios.get(url).then((response)=>{
+//     setTrending(response.data.coins);
+//     console.log(response.data.coins)
+// })
+// },[])
+useEffect(() => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setTrending(data.coins);
+        console.log(data.coins);
+      })
+      .catch((error) => {
+        // Handle any error that occurred during the fetch request
+        console.error('Error:', error);
+      });
+  }, []);
+
+
+
 
 
 const imageClass = {
