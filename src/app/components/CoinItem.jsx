@@ -4,7 +4,7 @@ import {AiFillStar, AiOutlineStar} from 'react-icons/ai'
 import { Sparklines ,SparklinesLine} from 'react-sparklines';
 import Link from 'next/link';
 import { UserAuth } from '../context/AuthContext';
-import { db } from '@/app/Firebase/page';
+import { db } from '../Firebase';
 import {arrayUnion,doc , updateDoc} from 'firebase/firestore'
 import Image from 'next/image';
 

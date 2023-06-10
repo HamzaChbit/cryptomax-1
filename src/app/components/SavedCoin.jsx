@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { AiOutlineClose } from 'react-icons/ai'
 import {doc,onSnapshot,updateDoc} from 'firebase/firestore'
-import { db } from '@/app/Firebase/page'
+import { db } from '../Firebase'
 import { UserAuth } from '../context/AuthContext'
 import Image from 'next/image'
 
