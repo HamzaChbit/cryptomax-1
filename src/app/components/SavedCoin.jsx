@@ -6,9 +6,9 @@ import Link from 'next/link'
 import { AiOutlineClose } from 'react-icons/ai'
 import {doc,onSnapshot,updateDoc} from 'firebase/firestore'
 import { db } from '@/app/Firebase/page'
-import { UserAuth } from '@/app/context/AuthContext/page'
+import { UserAuth } from '../context/AuthContext'
 import Image from 'next/image'
-import { async } from '@firebase/util'
+
 
 
 const SavedCoin = () => {

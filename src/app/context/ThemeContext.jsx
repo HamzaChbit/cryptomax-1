@@ -1,7 +1,7 @@
 
 'use client'
 import React , {useState , useEffect , createContext} from 'react'
-import Navbar from '../../components/Navbar/page'
+
 
 // import RootLayout from '../../layout'
 const getInitialTheme = () => {

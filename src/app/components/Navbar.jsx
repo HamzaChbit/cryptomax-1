@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link';
-import ThemeToggle from '../ThemeToggle/page';
+import ThemeToggle from './ThemeToggle';
 import {AiOutlineMenu,AiOutlineClose} from 'react-icons/ai'
 import { signOut} from 'firebase/auth'
 import { useRouter } from 'next/navigation'
-import {auth} from '../../Firebase/page'
+import {auth} from '../Firebase/page'
 import {useAuthState} from 'react-firebase-hooks/auth'
 
 

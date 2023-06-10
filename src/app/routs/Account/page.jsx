@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
-import SavedCoin from '@/app/components/SavedCoin/page'
-import { UserAuth } from '@/app/context/AuthContext/page'
+import SavedCoin from '../../components/SavedCoin'
+import { UserAuth } from '../../context/AuthContext'
 import { useRouter } from 'next/navigation'
 
-import Image from 'next/image'
+
 
 
 const Account = () => {

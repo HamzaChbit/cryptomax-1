@@ -1,5 +1,5 @@
 import React from 'react'
-import ThemeToggle from '../ThemeToggle/page'
+import ThemeToggle from './ThemeToggle'
 import { AiOutlineInstagram } from 'react-icons/ai'
 import { FaFacebook,FaGithub ,FaTiktok ,FaTwitter} from 'react-icons/fa'
 

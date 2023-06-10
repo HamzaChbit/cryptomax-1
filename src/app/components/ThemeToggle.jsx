@@ -1,7 +1,7 @@
 'use client'
 import React, { useContext } from 'react'
 import {HiSun, HiMoon} from 'react-icons/hi'
-import { ThemeContext } from '../../context/ThemeContext/page'
+import { ThemeContext } from '../context/ThemeContext'
 
 const ThemeToggle = () => {
 

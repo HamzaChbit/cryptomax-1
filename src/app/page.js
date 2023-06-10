@@ -1,10 +1,10 @@
 'use client'
-import Navbar from "./components/Navbar/page";
+
 import Home from './routs/[Home]/page';
-import { ThemeProvider } from "./context/ThemeContext/page";
+import { ThemeProvider } from "./context/ThemeContext";
 import React ,{useEffect, useState } from 'react'
-import axios from 'axios'
-import { AuthContextProvider } from "./context/AuthContext/page";
+
+import { AuthContextProvider } from "./context/AuthContext.jsx";
 
 export default function App() {
 

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+
 import { Sparklines ,SparklinesLine} from 'react-sparklines';
 import {FaTwitter,FaFacebook,FaReddit,FaGithub} from 'react-icons/fa';
 import DOMPurify from 'dompurify';

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {AiFillStar, AiOutlineStar} from 'react-icons/ai'
 import { Sparklines ,SparklinesLine} from 'react-sparklines';
 import Link from 'next/link';
-import { UserAuth } from '@/app/context/AuthContext/page';
+import { UserAuth } from '../context/AuthContext';
 import { db } from '@/app/Firebase/page';
 import {arrayUnion,doc , updateDoc} from 'firebase/firestore'
 import Image from 'next/image';
@@ -43,7 +43,7 @@ const CoinItem = ({coin}) => {
     <td  onClick={saveCoin} >
     {savedCoin ?   <AiFillStar    className='cursor-pointer' /> :   <AiOutlineStar  className='cursor-pointer'/>}
       </td>
-    <td>{coin.market_cap_rank}</td>
+    <td>{coin.rank}</td>
     <td>
     <Link  href={`/routs/CoinPage/${coin.id}` } >
       <div  className='flex items-center '    >

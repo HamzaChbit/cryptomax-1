@@ -1,6 +1,6 @@
 "use client"
 import { createContext,useContext,useState ,useEffect} from "react";
-import {auth,db} from '../../Firebase/page'
+import {auth,db} from '../Firebase/page'
 
 import {
     createUserWithEmailAndPassword,

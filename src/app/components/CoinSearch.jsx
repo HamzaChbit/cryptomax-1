@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 
-import CoinItem from '../CoinItem/page';
+import CoinItem from './CoinItem';
 
 const CoinSearch =
  ({coins }) => {
@@ -35,7 +35,8 @@ const CoinSearch =
         </thead>
         <tbody>
           
-             {coins.filter((value)=> {
+             {coins
+             .filter((value)=> {
               if(searchText ===''){
                 return value
               }else if (

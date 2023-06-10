@@ -2,9 +2,9 @@
 
 
 import React from 'react'
-import CoinSearch from '@/app/components/CoinSerach/page'
-import Trending from '@/app/components/Trending/page'
-import Footer from '@/app/components/Footer/page'
+import CoinSearch from '../../components/CoinSearch'
+import Trending from '../../components/Trending'
+
 
 
 const Home = ({coins}) => {
