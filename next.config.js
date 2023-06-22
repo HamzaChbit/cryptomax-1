@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  swcMinify : true,
-  reactStrictMode: true,
+ 
+  // reactStrictMode: true,
   optimizeFonts: true,
   images: {
     domains: ['assets.coingecko.com'],

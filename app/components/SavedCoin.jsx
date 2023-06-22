@@ -54,7 +54,7 @@ const SavedCoin = () => {
             <tbody>
                 {coins?.map((coin)=>(
                     <tr key={coin.id} className='h-[60px] overflow-hidden ' >
-                        <td>{coin?.rank} </td>
+                        <td>{coin?.name} </td>
                         <td>
                             <Link href={`/routs/CoinPage/${coin.id}`} >
                                 <div  className='flex items-center' > 
