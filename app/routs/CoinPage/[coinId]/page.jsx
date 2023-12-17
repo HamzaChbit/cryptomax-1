@@ -34,7 +34,7 @@ useEffect(() => {
 
 
   return (
-    <div  className='rounded-div  my-12 my-8 ' >
+    <div  className='rounded-div   my-8 ' >
       <div  className='flex py-8' >
         <Image width={35} height={35}   src={coin.image?.large} alt="/" className='w-20 mr-8'/>
         <div>

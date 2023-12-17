@@ -1,60 +1,53 @@
 "use client"
-import { createContext,useContext,useState ,useEffect} from "react";
-import {auth,db} from '../Firebase'
-
+import { createContext, useContext, useState, useEffect } from 'react';
+import { auth, db } from '../firebase';
 import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
 
-} from 'firebase/auth'
-import {doc, setDoc} from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore';
 
+const UserContext = createContext();
 
+export const AuthContextProvider = ({ children }) => {
+  const [user, setUser] = useState({});
 
-const UserContext = createContext()
+  const signUp = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password);
+    return setDoc(doc(db, 'users', email), {
+      watchList: [],
+    });
+  };
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-export const AuthContextProvider = ({children})  => {
+  const logout = () => {
+    return signOut(auth);
+  };
 
-    const [user,serUser] = useState({})
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
-    const signUp = (email, password) => {
-        createUserWithEmailAndPassword(auth,email,password)
-        return setDoc(doc(db,'users' ,email), {
-            watchList : []
-        })
-    }
-    const signIn = (email,password) => {
-        return signInWithEmailAndPassword(auth,email,password)
-    }
+  return (
+    <UserContext.Provider value={{ signUp, signIn, logout, user }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
 
-    const logout = () => {
-        return signOut(auth)
-    } 
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
-            serUser(currentUser)
-        })
-        return  ( ) => {
-            unsubscribe()
-        }
-    },[])
-return (
-    <UserContext.Provider   value={{signUp,signIn,logout,user}} >
-           
-            {children}
-</UserContext.Provider >
-)
-
-
-} 
-
-export const UserAuth = ( ) => {
-    return useContext(UserContext)
-}
-
+export const UserAuth = () => {
+  return useContext(UserContext);
+};
 
 
 
