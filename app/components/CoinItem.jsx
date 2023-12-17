@@ -4,9 +4,11 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import Link from 'next/link';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { UserAuth } from '../context/AuthContext';
-import { db } from '../firebase';
+
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import Image from 'next/image';
+import { db } from '../Firebase';
+
 const CoinItem = ({ coin }) => {
   
   const [savedCoin,setSavedCoin] = useState(false)

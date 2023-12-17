@@ -1,6 +1,6 @@
 "use client"
 import { createContext, useContext, useState, useEffect } from 'react';
-import { auth, db } from '../firebase';
+// import { auth, db } from '../firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 
 import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../Firebase';
 
 const UserContext = createContext();
 
