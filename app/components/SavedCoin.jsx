@@ -16,28 +16,25 @@ const SavedCoin = () => {
     const [coins,setCoins] = useState([])
     const {user} = UserAuth()
 
-    useEffect(()=>{
-        onSnapshot(doc(db,'users',`${user?.email}`),(doc)=>{
-            setCoins(doc.data()?.watchList)
-        })
-    },[user?.email])
-
-
-        const coinPath = doc(db,'users',`${user?.email}`)
-        const deleteCoin = async (passedid) => {
-            try {
-                const result =coins.filter((item) => item.id  !== passedid)
-                await updateDoc(coinPath,{
-                    watchList :result
-                }) 
-            }catch (e){
-                console.log(e.message)
-            }
-        } 
-
-    
-
-
+   
+  
+    useEffect(() => {
+      onSnapshot(doc(db, 'users', `${user?.email}`), (doc) => {
+        setCoins(doc.data()?.watchList);
+      });
+    }, [user?.email]);
+  
+    const coinPath = doc(db, 'users', `${user?.email}`);
+    const deleteCoin = async (passedid) => {
+      try {
+        const result = coins.filter((item) => item.id !== passedid);
+        await updateDoc(coinPath, {
+          watchList: result,
+        });
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
 
   return (
     <div>
@@ -66,9 +63,12 @@ const SavedCoin = () => {
                                 </div>
                             </Link>
                         </td>
-                        <td className='pl-8' >
-                            <AiOutlineClose size={20} onClick={() => deleteCoin(coin.id)} className='cursor-pointer  hover:text-red-600  '/>
-                        </td>
+                        <td className='pl-8'>
+                  <AiOutlineClose
+                    onClick={() => deleteCoin(coin.id)}
+                    className='cursor-pointer'
+                  />
+                </td>
 
                     </tr>
                 ))}

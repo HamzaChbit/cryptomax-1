@@ -11,57 +11,79 @@ import { db } from '../Firebase';
 
 const CoinItem = ({ coin }) => {
   
-  const [savedCoin,setSavedCoin] = useState(false)
-  const {user} = UserAuth()
-
-  const coinPath = doc(db,'users',`${user?.email}`)
-
+  const [savedCoin, setSavedCoin] = useState(false);
+  const { user } = UserAuth();
  
-  const saveToLocalStorage = (coin) => {
-    const savedCoins = JSON.parse(localStorage.getItem('savedCoins')) || [];
-    const existingCoin = savedCoins.find((saved) => saved.id === coin.id);
 
-    if (!existingCoin) {
-      savedCoins.push({
-        id: coin.id,
-        name: coin.name,
-        image: coin.image,
-        rank: coin.image,
-        symbol: coin.symbol,
-      });
 
-      localStorage.setItem('savedCoins', JSON.stringify(savedCoins));
-      setSavedCoin(true); // Update the state here
-    }
-  };
+  const coinPath = doc(db, 'users', `${user?.email}`);
 
-  const saveCoinToFirestore = async () => {
+
+  useEffect(() => {
+    const fetchUserWatchlist = async () => {
+      try {
+        if (user?.email) {
+          // Fetch user's watchlist from Firestore
+          const userDoc = await doc(db, 'users', `${user?.email}`);
+          const userSnap = await userDoc.get();
+
+          if (userSnap.exists()) {
+            const userWatchlist = userSnap.data().watchList || [];
+            const isCoinSaved = userWatchlist.some((item) => item.id === coin.id);
+            setSavedCoin(isCoinSaved);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user watchlist:', error);
+      }
+    };
+
+    fetchUserWatchlist();
+  }, [user?.email, coin.id]);
+
+
+  const toggleSavedCoin = async () => {
     if (user?.email) {
-      await updateDoc(coinPath, {
-        watchList: arrayUnion({
-          id: coin.id,
-          name: coin.name,
-          image: coin.image,
-          rank: coin.image,
-          symbol: coin.symbol,
-        }),
-      });
-      setSavedCoin(true); // Update the state here
+      if (savedCoin) {
+        // Delete the coin from watchlist
+        setSavedCoin(false);
+        await updateDoc(coinPath, {
+          watchList: arrayRemove({
+            id: coin.id,
+            name: coin.name,
+            image: coin.image,
+            rank: coin.market_cap_rank,
+            symbol: coin.symbol,
+          }),
+        });
+      } else {
+        // Save the coin to watchlist
+        setSavedCoin(true);
+        await updateDoc(coinPath, {
+          watchList: arrayUnion({
+            id: coin.id,
+            name: coin.name,
+            image: coin.image,
+            rank: coin.market_cap_rank,
+            symbol: coin.symbol,
+          }),
+        });
+      }
     } else {
-      alert('Please sign in to save a coin to your watch list');
+      alert('Please sign in to save or remove a coin from your watch list');
     }
   };
+  
 
-  const saveCoin = () => {
-    if (!savedCoin) {
-      saveCoinToFirestore();
-      saveToLocalStorage(coin);
-    }
-  };
+
+
+
+
+
   return (
     <tr className='h-[80px] border-b overflow-hidden'>
-        <td onClick={saveCoin}>
-        {savedCoin ? <AiFillStar className='cursor-pointer' /> : <AiOutlineStar className='cursor-pointer' />}
+       <td onClick={toggleSavedCoin}>
+        {savedCoin ? <AiFillStar /> : <AiOutlineStar />}
       </td>
       <td>{coin.market_cap_rank}</td>
       <td>
